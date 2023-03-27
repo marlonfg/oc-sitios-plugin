@@ -1,5 +1,6 @@
 <?php namespace MarlonFreire\Sitios;
 
+use Illuminate\Support\Facades\Redirect;
 use MarlonFreire\Sitios\Console\CurrencyUpdate;
 use MarlonFreire\Sitios\Console\OrderCanceled;
 use MarlonFreire\Sitios\Console\ZureoUpdate;
@@ -8,6 +9,11 @@ use MarlonFreire\Sitios\Console\Deploy;
 use Lovata\Shopaholic\Models\Product;
 use Lovata\Shopaholic\Models\Offer;
 use Lovata\Shopaholic\Controllers\Products;
+use Lovata\Shopaholic\Classes\Helper\CurrencyHelper;
+use October\Rain\Support\Facades\Input;
+use Lovata\PropertiesShopaholic\Models\Property;
+use Lovata\PropertiesShopaholic\Models\PropertyValueLink;
+use Event;
 
 class Plugin extends PluginBase
 {
@@ -25,7 +31,6 @@ class Plugin extends PluginBase
     public function register()
     {
         $this->registerConsoleCommand('assets:deploy', Deploy::class);
-        $this->registerConsoleCommand('zureo:update', ZureoUpdate::class);
         $this->registerConsoleCommand('currency:update', CurrencyUpdate::class);
         $this->registerConsoleCommand('order:canceled', OrderCanceled::class);
     }
@@ -47,15 +52,13 @@ class Plugin extends PluginBase
             $model->addFillable([
                 'stock',
                 'show_no_stock',
-                'sort_order',
-                'proveedor_id',
+                'sort_order'
             ]);
 
             $model->addCached([
                 'stock',
                 'show_no_stock',
-                'sort_order',
-                'proveedor_id',
+                'sort_order'
             ]);
 
             //Agregar a fields.yaml
@@ -87,23 +90,13 @@ class Plugin extends PluginBase
         Offer::extend(function ($model) {
             $model->addFillable([
                 'sort_order',
-                'currency_id',
-                'precio_por_mayor',
-                'sale_price',
-                'discount_groups_id'
+                'currency_id'
             ]);
 
             $model->addCached([
                 'sort_order',
                 'currency_id',
-                'precio_por_mayor',
-                'sale_price',
-                'discount_groups_id',
                 'currency_symbol',
-            ]);
-
-            $model->addJasonable([
-                'precio_por_mayor'
             ]);
 
             $model->addAppends([
@@ -111,8 +104,7 @@ class Plugin extends PluginBase
             ]);
 
             $model->belongsTo['currency'] = [Currency::class];
-            $model->belongsTo['discount_groups'] = [DiscountGroups::class, 'key' => 'discount_groups_id'];
-
+        
             //Agregar a columns.yaml
             $model->addDynamicField('sort_order', [
                 'label' => 'Orden',
@@ -128,43 +120,6 @@ class Plugin extends PluginBase
                 'span' => 'left',
                 'permissions' => -'shopaholic-offer-multi-moneda',
                 'tab' => 'lovata.toolbox::lang.tab.settings'
-            ]);
-
-            $model->addDynamicField('precio_por_mayor', [
-                'label' => 'Intervalos de precios',
-                'prompt' => 'Adicionar Nuevo Intervalo',
-                'type' => 'repeater',
-                'span' => 'auto',
-                'permissions' => -'shopaholic-offer-precio-por-mayor',
-                'tab' => 'Precio Por Mayor',
-                'forms' => [
-                    'fields'  => [
-                        'cantidad' => [
-                            'label' => 'Cantidad',
-                            'span' => 'auto',
-                            'type' => 'number'
-                        ],
-                        'precio' => [
-                            'label' => 'Precio',
-                            'span' => 'auto',
-                            'type' => 'number'
-                        ],
-                        'texto' => [
-                            'label' => 'Texto',
-                            'span' => 'auto',
-                            'type' => 'text',
-                            'size' => 'small'
-                        ],
-                    ]                  
-                ]
-            ]);
-
-            $model->addDynamicField('discount_groups', [
-                'label' => 'Grupo de Descuentos',
-                'type' => 'relation',
-                'span' => 'auto',
-                'permissions' => -'shopaholic-discount-manage-groups',
-                'tab' => 'Precio Por Mayor'
             ]);
 
             //Agregar a columns.yaml
@@ -185,23 +140,15 @@ class Plugin extends PluginBase
                 'permissions' => -'shopaholic-offer-multi-moneda',
             ]);
 
-            $model->addDynamicColumn('sale_price', [
-                'label' => 'Precio de Compra',
-                'type' => 'text',
-                'searchable' => 'false',
-                'sortable' => 'false',
-                'permissions' => -'shopaholic-manage_sale_price'
-            ]);
-
-            $model->addDynamicMethod('getCurrencySymbolAttribute', function() {
-                if($this->currency)
-                    return $this->currency->symbol;
+            $model->addDynamicMethod('getCurrencySymbolAttribute', function()  use ($model){
+                if($model->currency)
+                    return $model->currency->symbol;
                 else
                     return CurrencyHelper::instance()->getActiveCurrencySymbol();
             });
 
-            $model->addDynamicMethod('getSalePriceAttribute', function() {
-                return !empty($this->attributes['sale_price']) ? $this->attributes['sale_price'] : 0;
+            $model->addDynamicMethod('getSalePriceAttribute', function() use ($model){
+                return !empty($model->attributes['sale_price']) ? $model->attributes['sale_price'] : 0;
             });
 
             
@@ -324,8 +271,8 @@ class Plugin extends PluginBase
                 }
             });
 
-            $controller->addDynamicMethod('onReorder', function () {
-                $obResult = parent::onReorder();
+            $controller->addDynamicMethod('onReorder', function () use ($controller){
+                $obResult = $controller->parent::onReorder();
                 Event::fire('shopaholic.product.update.sorting');
 
                 return $obResult;

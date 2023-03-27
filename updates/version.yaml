@@ -16,35 +16,20 @@
     - 'Update table products add show_no_stock'
     - update_table_products_add_field_show_no_stock.php
 1.6.0:
-    - 'Update table products add precio por mayor'
-    - update_table_offers_add_precio_por_mayor.php
-1.7.0:
     - 'Update table products add free_shipping'
     - update_table_products_add_free_shipping.php
-1.8.0:
+1.7.0:
     - 'Update table offers add currency'
     - update_table_offers_add_currency.php
-1.9.0:
+1.8.0:
     - 'Create currency UYU'
     - seeder_create_currency_uyu.php
-1.10.0:
+1.9.0:
     - 'Update table currency rate 3 decimal'
     - update_table_currency_rate_float.php
-1.11.0:
+1.10.0:
     - 'Update table products add sort_order'
     - update_table_products_add_sort_order.ph
-1.12.0:
-    - 'Update table offers add sale_price'
-    - update_table_offers_add_sale_price.php
-1.13.0:
-    - 'Created table lovata_shopaholic_proveedores'
-    - builder_table_create_lovata_shopaholic_proveedores.php
-1.14.0:
-    - 'Updated table lovata_shopaholic_products add proveedor_id'
-    - update_table_products_add_proveedor_id.php
-1.15.0:
+1.11.0:
     - 'Update table products add stock'
     - update_table_products_add_field_stock.php
-1.16.0:
-    - 'Update table offers add discount groups'
-    - update_table_offers_add_discount_groups_id.php
