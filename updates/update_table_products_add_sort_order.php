@@ -21,7 +21,7 @@ class UpdateTableProductsAddSortOrder extends Migration
         }
 
         Schema::table(self::TABLE_NAME, function (Blueprint $obTable) {
-            $obTable->integer('sort_order')->nullable();
+            $obTable->integer('sort_order')->default(0);
         });
     }
 

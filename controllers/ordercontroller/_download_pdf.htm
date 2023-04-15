@@ -1,0 +1,10 @@
+<?php
+
+/** @var \Lovata\OrdersShopaholic\Models\Order $record */
+if (empty($record)) {
+    return;
+}
+?>
+<a href="<?= Backend::url('lovata/ordersshopaholic/orders/pdf').'/'.$record->id ?>" class="btn btn-primary oc-icon-download">
+    
+</a>

@@ -11,12 +11,12 @@ class Deploy extends Command
     /**
      * @var string The console command name.
      */
-    protected $name = 'assets:deploy';
+    protected $name = 'sitios:deploy';
 
     /**
      * @var string The console command description.
      */
-    protected $description = 'Despliegue de assets de la compañía';
+    protected $description = 'Despliegue de sitios';
 
     /**
      * Execute the console command.
@@ -34,6 +34,7 @@ class Deploy extends Command
 //        copy('./bootstrap/backups/backend/database/seeds/SeedSetupAdmin.php', './modules/backend/database/seeds/SeedSetupAdmin.php');
 //        (new Filesystem())->copyDirectory('./bootstrap/backups/system/assets/css/lightbox', './modules/system/assets/css/lightbox');
 //        (new Filesystem())->copyDirectory('./bootstrap/backups/system/assets/js/lightbox', './modules/system/assets/js/lightbox');
+        copy('./plugins/marlonfreire/sitios/controllers/ordercontroller/export.htm', './plugins/lovata/ordersshopaholic/controllers/orders/export.htm');
         $this->output->writeln('Succesfull!!!');
     }
 
