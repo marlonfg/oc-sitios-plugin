@@ -2,16 +2,11 @@
     "name": "marlonfreire/sitios",
     "type": "october-plugin",
     "description": "Add features for OctoberCMS",
-    "keywords": [
-         
-    ],
+    "keywords": [],
     "require": {
-        "composer/installers": "~1.0",
-         
+        "composer/installers": "~1.0"
     },
-    "autoload": {
-         
-    },
+    "autoload": {},
     "config": {
         "allow-plugins": {
             "composer/installers": true
