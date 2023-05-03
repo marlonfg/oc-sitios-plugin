@@ -14,7 +14,7 @@ use MarlonFreire\Sitios\Classes\Event\ExtendProductModel;
 class Plugin extends PluginBase
 {
 
-    public $require = ['RainLab.Location', 'RainLab.Translate', 'Lovata.Shopaholic', 'Renatio.DynamicPDF'];
+    public $require = ['RainLab.Location', 'Lovata.Shopaholic', 'Renatio.DynamicPDF'];
 
     public function registerComponents()
     {

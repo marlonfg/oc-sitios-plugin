@@ -5,6 +5,7 @@ use Event;
 use Lovata\OrdersShopaholic\Controllers\Orders;
 use Lovata\OrdersShopaholic\Models\Order;
 use Renatio\DynamicPDF\Classes\PDF;
+use Renatio\DynamicPDF\Models\Template;
 
 class ExtendOrderController
 {
@@ -16,9 +17,16 @@ class ExtendOrderController
             $controller->addDynamicProperty('importExportConfig', '$/marlonfreire/sitios/controllers/ordercontroller/config_import_export.yaml');
  
             $controller->addDynamicMethod('onExportPDF', function ($id){
-                $order = Order::find($id);
+                $order = Order::find($id)->toArray();
 
-                return PDF::loadTemplate('renatio::invoice', $order)->download('Orden-Nro-'.$order->order_number.'.pdf');
+                $order['site_name'] = config('app.name');
+
+                $template = Template::first();
+
+                if(empty($template))
+                    return;
+
+                return PDF::loadTemplate($template->code , $order)->download('Orden-Nro-'.$order['order_number'].'.pdf');
             });
          });
 
