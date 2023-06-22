@@ -17,16 +17,19 @@ class ExtendOrderController
             $controller->addDynamicProperty('importExportConfig', '$/marlonfreire/sitios/controllers/ordercontroller/config_import_export.yaml');
  
             $controller->addDynamicMethod('onExportPDF', function ($id){
-                $order = Order::find($id)->toArray();
+                $order = Order::find($id);
 
-                $order['site_name'] = config('app.name');
+                $data = [
+                    'order' => $order,
+                    'site_name' => config('app.name')
+                ];
 
                 $template = Template::first();
 
                 if(empty($template))
                     return;
 
-                return PDF::loadTemplate($template->code , $order)->download('Orden-Nro-'.$order['order_number'].'.pdf');
+                return PDF::loadTemplate($template->code , $data)->download('Orden-Nro-'.$order->order_number.'.pdf');
             });
          });
 

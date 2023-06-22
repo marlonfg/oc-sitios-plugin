@@ -83,6 +83,9 @@ class ExtendProductController
             $newStock = $product->offer->sum('quantity');
             // Actualizar el campo de stock del producto
             $product->stock = $newStock;
+            // Desactivar si stock es cero
+            if($newStock == 0)
+                $product->active = 0;
             $product->save();
         });
 
@@ -94,6 +97,9 @@ class ExtendProductController
             $newStock = $product->offer->sum('quantity');
             // Actualizar el campo de stock del producto
             $product->stock = $newStock;
+            // Desactivar si stock es cero
+            if($newStock == 0)
+                $product->active = 0;
             $product->save();
         });
     }
