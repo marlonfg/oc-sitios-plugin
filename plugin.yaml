@@ -1,7 +1,13 @@
 plugin:
-    name: 'marlonfreire.sitios::lang.plugin.name'
-    description: 'marlonfreire.sitios::lang.plugin.description'
-    author: Sitios
+    name: 'Sitios'
+    description: 'Plugin to integrate with Shopaholic that adds the following functionalities:
+                 - Add a custom simple selector.
+                 - Global stock of products.
+                 - Implements reorder in products.
+                 - Implements export in orders.
+                 - Implements the PDF download in orders.
+                 - Deactivate products with zero stock'
+    author: MarlonFreire
     icon: oc-icon-star-o
     homepage: ''
 permissions:
