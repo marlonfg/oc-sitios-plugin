@@ -1,0 +1,34 @@
+plugin:
+    name: 'Sitios'
+    description: 'Plugin to integrate with Shopaholic that adds the following functionalities:
+                 - Add a custom simple selector.
+                 - Global stock of products.
+                 - Implements reorder in products.
+                 - Implements export in orders.
+                 - Implements the PDF download in orders.
+                 - Deactivate products with zero stock'
+    author: MarlonFreire
+    icon: oc-icon-star-o
+    homepage: ''
+permissions:
+    manage_theme:
+        tab: 'marlonfreire.sitios::lang.tabs.manage_theme'
+        label: 'marlonfreire.sitios::lang.label.manage_theme'
+    shopaholic-offer-precio-por-mayor:
+        tab: 'Administrar Precios Por Mayor'
+        label: 'Precio Por  Mayor'
+    shopaholic-offer-multi-moneda:
+        tab: 'Administrar funcionalidad multimoneda'
+        label: Multimoneda
+    shopaholic-product-preview-video:
+        tab: 'Administrar video de vista previa'
+        label: 'Video'
+    shopaholic-generate_offers:
+        tab: 'Administrar generar ofertas automáticamente'
+        label: 'Generar ofertas'
+    shopaholic-manage_sale_price:
+        tab: 'Administrar precio de compra'
+        label: 'Precio de compra'
+    shopaholic-manage_proveedores:
+        tab: 'Administrar proveedores'
+        label: 'Proveedores'

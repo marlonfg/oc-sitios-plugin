@@ -1,0 +1,29 @@
+export:
+  title: 'Exportar'
+  modelClass: MarlonFreire\Sitios\Models\OrdersExport
+  redirect: lovata/ordersshopaholic/orders
+  list:
+    columns:
+      id:
+        label: 'ID'
+      order_number:
+        label: 'lovata.ordersshopaholic::lang.field.order_number'
+      # tracking_number:
+      #   label: 'Tracking'
+      comprador:
+        label: 'Comprador'
+      # producto:
+      #   label: 'Producto'
+      currency_name:
+        label: 'Moneda'
+      total_price:
+        label: 'Precio Total'
+      status_name:
+        label: 'Estado'
+      created_at:
+        label: 'Creado'
+defaultFormatOptions:
+  delimiter: ';'
+  enclosure: '"'
+  escape: '\'
+  encoding: 'utf-8'

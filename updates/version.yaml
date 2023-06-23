@@ -1,0 +1,26 @@
+1.0.1:
+    - Initialize plugin.
+1.1.0:
+      - Include Uruguay states in Rainlab
+      - seed_uy_states.php
+1.2.0:
+      - Add locale 'es' por default para el front-end
+      - seed_locale.php
+1.3.0:
+      - Update price format miles separator
+      - seed_price_format.php
+1.4.0:
+    - 'Update table products add show_no_stock'
+    - update_table_products_add_field_show_no_stock.php
+1.5.0:
+    - 'Create currency UYU'
+    - seeder_create_currency_uyu.php
+1.6.0:
+    - 'Update table currency rate 3 decimal'
+    - update_table_currency_rate_float.php
+1.7.0:
+    - 'Update table products add sort_order'
+    - update_table_products_add_sort_order.php
+1.8.0:
+    - 'Update table products add stock'
+    - update_table_products_add_field_stock.php
