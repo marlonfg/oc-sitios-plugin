@@ -1,12 +1,21 @@
 plugin:
     name: 'Sitios'
-    description: 'Plugin to integrate with Shopaholic that adds the following functionalities:
-                 - Add a custom simple selector.
-                 - Global stock of products.
-                 - Implements reorder in products.
-                 - Implements export in orders.
-                 - Implements the PDF download in orders.
-                 - Deactivate products with zero stock'
+    description: 'This plugin adds custom functionalities to Shopaholic to manage product stock and orders in your ecommerce site. It includes a simple selector, global stock, reorder products, export and PDF download of orders, and deactivation of products with zero stock.'
+    long_description: 'This OctoberCMS plugin extends the functionality of Shopaholic to provide advanced stock and order management. It includes the following features:
+
+                        -Custom simple selector: Provides a custom selector for categories that is simple and easy to use.
+
+                        -Global stock of products: Allows you to manage the stock of all products in your ecommerce site from a single location.
+
+                        -Implements reorder in products: Allows you to reorder products in your ecommerce site with ease.
+
+                        -Implements export in orders: Allows you to export orders from your ecommerce site to CSV format for further analysis.
+
+                        -Implements the PDF download in orders: Allows you to download orders from your ecommerce site in PDF format.
+
+                        -Deactivate products with zero stock: Automatically deactivates products when the stock level reaches zero to prevent customers from ordering out-of-stock items.
+
+                        This plugin is designed to be easy to use and customizable to meet the needs of your ecommerce site. With its advanced stock and order management features, it can help you streamline your operations and improve your customer experience.'
     author: MarlonFreire
     icon: oc-icon-star-o
     homepage: ''
