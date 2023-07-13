@@ -60,5 +60,24 @@ class ExtendOrderController
             return '<a class="btn btn-primary oc-icon-download" href="' . $url . '">' . $label . '</a>';
         });
 
+        // Escucha el evento de cancelacion de la oferta
+        Order::saved(function($order) {
+            if($order->status->code == 'canceled' && $order->getOriginal('status_id') != 4){
+                // Obtener las positions
+                $order_position = $order->order_position;
+                //Recorrer las positions para devolver el stock
+                foreach($order_position as $ops){
+                    //Obtengo la cantidad a devolver
+                    $quantity = $ops->quantity;
+                    //Obtengo la oferta relacionada
+                    $offer =  $ops->offer;
+                    //Actualizo la oferta
+                    $offer->quantity += $quantity;
+                    $offer->save();
+                }
+            }
+            
+        });
+
     }
 }
