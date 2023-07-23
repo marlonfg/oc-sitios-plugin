@@ -61,6 +61,7 @@ class ExtendProductController
 
             $controller->addDynamicProperty('reorderConfig', '$/marlonfreire/sitios/controllers/reorderproductcontroller/config_reorder.yaml');
  
+            $controller->addDynamicProperty('categories', \Lovata\Shopaholic\Models\Category::all()->toArray());
         });
 
         Event::listen('lovata.backend.extend_list_toolbar', function ($obController) {

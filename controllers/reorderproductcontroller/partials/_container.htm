@@ -5,6 +5,18 @@
     </div>
 <?php endif ?>
 
+<form id="category-filter-form">
+    <div class="form-group">
+        <label for="category-filter">Filter by Category:</label>
+        <select id="category-filter" class="form-control" style="width: 250px;">
+            <option value="">All Categories</option>
+            <?php foreach ($this->categories as $category): ?>
+                <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+            <?php endforeach ?>
+        </select>
+    </div>
+</form>
+
 <!-- Reorder List -->
 <?= Form::open() ?>
     <div
@@ -26,4 +38,29 @@
 
 <script>
     $.oc.reorderBehavior.initSorting('<?= $reorderSortMode ?>');
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#category-filter').change(function() {
+            var categoryId = $(this).val();
+            // Realizar una llamada AJAX a la ruta que filtra los productos por categoría
+            $.ajax({
+                url: '/get-products-by-category/' + categoryId,
+                method: 'GET',
+                success: function(response) {
+                    // Recorrer cada elemento <li> en el listado de productos
+                        $('li[data-record-id]').each(function() {
+                            var productId = $(this).data('record-id');
+                            // Comprobar si el ID del producto existe en la respuesta de la consulta
+                            if (response.includes(productId)) {
+                                $(this).show(); // Mostrar el elemento si el producto está en la respuesta
+                            } else {
+                                $(this).hide(); // Ocultar el elemento si el producto no está en la respuesta
+                            }
+                    });
+                }
+            });
+        });
+    });
 </script>
